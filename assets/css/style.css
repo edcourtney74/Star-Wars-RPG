@@ -2,7 +2,7 @@
     width: 100%;
 }
 
-.character-image {
+.start-character-image {
     width: 10%;
     padding: 0px 10px;
 }
@@ -10,3 +10,7 @@
 .enemies-left {
     width:50%;
 }
+
+/* .#user-character {
+    
+} */
