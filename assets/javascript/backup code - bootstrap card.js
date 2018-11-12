@@ -47,7 +47,7 @@ function resetGame() {
          // Create <img> elements
         var imageCharacter = $("<img>");
         // Add class to imageCharacter
-        imageCharacter.addClass("character-image");
+        imageCharacter.addClass("character-image car-img-top");
         // Concatenate src address for images
         imageSrc = "assets/images/character" + i + ".jpg";
         // Add imageSrc to imageCharacter
@@ -59,9 +59,12 @@ function resetGame() {
         // Add data attribute for CP to imageCharacter
         imageCharacter.attr("data-CP", charCP);
         // Append imageCharacters to HTML
-        $("#character-list").append(imageCharacter);
         
 
+
+        var imageHTML = "<div class='card' style='width:10rem;'><img class='card-img-top' src=" + imageSrc + "><div class='card-body'><p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p></div>";
+
+        $("#character-list").append(imageHTML);
 
 
 

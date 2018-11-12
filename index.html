@@ -9,22 +9,61 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
 </head>
 <body>
-    <!-- Title -->
-    <h1>Stars Wars RPG</h1>
-    <!-- Images for characters -->
-    <h2>Choose one of these characters</h2>
-    <div id="character-list"></div>
-    <!-- Attacker area -->
-    <h2 id="user-character">Your Character</h2>
-    <!-- Defender List -->
-    <h2 id="enemies-list">Enemies Available to Attack</h2>
-    <!-- Defender area -->
-    <h2 id="current-enemy">Current Defender</h2>
-    <!-- Attack button -->
-    <button type="button" class="btn btn-warning">Attack</button>
-    <!-- Battle log -->
-    <p id="battle-log">Dummy text</p>    
+    <!-- Start of Bootstrap grid -->
+    <div class="container">
+        <!-- Title bar -->
+        <div class="row">
+            <div class="col-md-12 text-center"><h1>Star Wars Face-off</h1></div>
+        </div>
+        <!-- Character choice bar -->
+        <div class="row">
+            <div class="col-md-12"><h4>Choose a character</h4>
+                <div id="character-list"></div>
+            </div>
+        </div>
+        <!-- Game play area -->
+        <div class="row">
+            <!-- Remaining enemies section -->
+            <div class="col-md-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Enemies</h5>
+                        <img class="enemies-left" src="assets/images/character1.jpg">
+                        <img class="enemies-left" src="assets/images/character2.jpg">
+                        <img class="enemies-left" src="assets/images/character3.jpg">
+                    </div>
+                </div>
+            </div>
+            <!-- Attack area -->
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Your character</h4>
+                        <img class="your-character" src="assets/images/character1.jpg">
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-warning attack-btn">Attack</button>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Defender</h4>
+                        <img class="your-character" src="assets/images/character2.jpg">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Battle log text</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
+
+
+    
+    
+    
+   
 
 
 <!-- Javascript links -->
