@@ -24,7 +24,7 @@ body {
     border-bottom: gray thin solid;
 }
 
-.enemies-list {
+#enemies-list {
     border-right: thin white solid;
 }
 

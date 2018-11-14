@@ -60,6 +60,10 @@ var defenderCP;
 var defenderName = "";
 // Variable for wins - this won't display, but will be used to determine when all defenders have been defeated
 var wins;
+// TESTING THESE VARIABLES
+var enemies;
+var enemy2;
+var enemy3;
 
 // GLOBAL FUNCTIONS
 
@@ -163,6 +167,13 @@ function selectCharacters() {
                 baseUserAP = mace.AP;
                 userAP = mace.AP;            
                 $(".assignedHP-mace").addClass("HP-counter");
+
+                // TESTING THIS OUT
+                enemies = $(".card-deck").html();
+                console.log(`enemy 1 text: ${enemies}`);
+                $("#enemies-left").append(enemies);
+                // $(".start-character-image").removeClass(".start-character-image");
+                
             } 
             
             else if ($(this).attr('value') === "dooku") {
@@ -301,17 +312,13 @@ function attack() {
     })
 }
 
-// Overall game play function
-function startGame() {
+// GAME PLAY============================================================
+$(document).ready(function () {
     resetGame();
     createGameValues();
     selectCharacters();
     attack();
-}
 
-// GAME PLAY============================================================
-$(document).ready(function () {
-    startGame();
 })
 
 
