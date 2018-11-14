@@ -7,8 +7,8 @@ body {
     width: 100%;
 }
 
-.card {
-    max-width: 150px;
+.start-character-image {
+    max-width: 120px;
 }
 
 .card-text {
@@ -40,8 +40,10 @@ body {
     font-size: 55px;
 }
 
+#defender-character {
+    max-width: 150px;
+}
+
 #user-character {
-    width:100%;
-    /* border: gray thin solid; */
-    /* color: white */
+    max-width: 150px;
 }

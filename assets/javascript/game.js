@@ -37,7 +37,7 @@ var HPPossibles = [100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200];
 // Array of selected HP for the four characters
 var HPTotal = [];
 // Array of possible attack power value for each character
-var APPossibles = [5, 6, 7, 8, 9, 10, 11];
+var APPossibles = [7, 8, 9, 10, 11, 12, 13];
 // Array of selected AP for the four characters
 var APTotal = [];
 // Array of possible counterattack power value for each character
@@ -60,14 +60,14 @@ var defenderCP;
 var defenderName = "";
 // Variable for wins - this won't display, but will be used to determine when all defenders have been defeated
 var wins;
+
 // GLOBAL FUNCTIONS
-// Reset game
 
 function resetGame() {
     // Reset arrays, variables to original values
     HPPossibles = [100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200]
     APPossibles = [7, 8, 9, 10, 11, 12, 13];
-    CPPossibles = [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+    CPPossibles = [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
     isCharacterChosen = false;
     wins = 0;
     // Disables attack button & reset button until characters are selected
@@ -91,11 +91,9 @@ function createGameValues() {
         //Calculate random index number for HPpossibles
         var indexHP = Math.floor(Math.random() * HPPossibles.length);
         charHP = HPPossibles[indexHP];
-        console.log(`Character${i} hit points: ${charHP}`)
 
         // Remove charHP from array so each character has a different HP;
         HPPossibles.splice(indexHP, 1);
-        console.log("charHP" + charHP);
 
         // Put charHP into HPTotal array to assign to character objects later
         HPTotal.push(charHP);
@@ -104,7 +102,6 @@ function createGameValues() {
         //Calculate random index number for APPossibles
         var indexAP = Math.floor(Math.random() * APPossibles.length);
         charAP = APPossibles[indexAP];
-        console.log(`Character${i} attack power: ${charAP}`)
 
         // Remove charAP from array so each character has a different Attack Power;
         APPossibles.splice(indexAP, 1);
@@ -116,7 +113,6 @@ function createGameValues() {
         // Calculate random index number for CPPossibles
         var indexCP = Math.floor(Math.random() * CPPossibles.length);
         charCP = CPPossibles[indexCP];
-        console.log(`Character${i} counterattack power: ${charCP}`)
 
         // // Remove charCP from array so each character has a different Attack Power;
         CPPossibles.splice(indexCP, 1);
@@ -138,10 +134,6 @@ function createGameValues() {
     maul.HP = HPTotal[3];
     maul.AP = APTotal[3];
     maul.CP = CPTotal[3];
-    console.log(mace);
-    console.log(dooku);
-    console.log(yoda);
-    console.log(maul);
 
     // DIsplay HP on the screen
     $(".assignedHP-mace").text(`${mace.HP} hit points`);
@@ -165,6 +157,7 @@ function selectCharacters() {
             $("#intro-text").text("Choose your opponent")
 
             // Return value from HTML, assign HP, baseUserAp and userAP
+            // Add HP-counter class to display running HP total on screen
             if ($(this).attr('value') === "mace") {
                 userHP = mace.HP;
                 baseUserAP = mace.AP;
@@ -190,22 +183,18 @@ function selectCharacters() {
                 userHP = maul.HP;
                 baseUserAP = maul.AP;
                 userAP = maul.AP;
-                $(".assignedHP-maul").addClass("HP-counter");
-             
+                $(".assignedHP-maul").addClass("HP-counter");             
             }
 
             // Enable reset button
             $(".reset-btn").attr("disabled", false);
 
-            console.log(`User HP: ${userHP}`);
             // Need to move enemies elsewhere but can't figure it out
 
             // Hide choose a character area - this works but I want to wait to activate it while I'm testing
             // $(".character-choice").empty();
 
-
         } else {
-
             // Remove start-character-image class
             $(this).removeClass("start-character-image");
 
@@ -220,6 +209,7 @@ function selectCharacters() {
             $(this).addClass("current-defender");
 
             // Return value from HTML, assign HP, CP
+            // Add class to display running HP total on screen
             if ($(this).attr('value') === "mace") {
                 defenderHP = mace.HP;
                 defenderCP = mace.CP;
@@ -248,14 +238,11 @@ function selectCharacters() {
             $(".attack-btn").attr("disabled", false);
 
             // Add text to battle log
-            $("#battle-log").html("<p>Hit the attack button to attack your opponent</p><br><br>");
-
-
-            // DELETE THIS - testing only
-            // $(".character-choice").empty();
+            $("#battle-log").html("<p>Hit the attack button to begin the battle.</p><br><br>");
         }
     })
 
+    // Set reset button to do a browser refresh
     $(".reset-btn").on("click", function () {
         location.reload();
     })
@@ -269,16 +256,14 @@ function attack() {
         // Calculate new HP left for both characters
         userHP -= defenderCP;
         defenderHP -= userAP;
-        console.log(`New User HP: ${userHP}`)
-        console.log(`New Defender HP: ${defenderHP}`)
+        // Increase attacker AP by baseAP
         userAP += baseUserAP;
         // Display to screen
         $(".HP-counter").text(`${userHP} hit points`)
         $(".HP-counter-opponent").text(`${defenderHP} hit points`)
 
-
-        // Check to see if you lost
-        if (userHP <= 0) {
+        // Check to see if user lost
+        if (userHP <= 0 && defenderHP > 0) {
             $("#battle-log").html("<h3>You lost.</h3><p>Hit the reset button to try again.<br>");
             // Disable attack button - game is over;
             $(".attack-btn").attr("disabled", true);
@@ -286,10 +271,10 @@ function attack() {
             $(".reset-btn").attr("disabled", false); 
         
             // Check to see if defender is out of HP
-        } else if (defenderHP <= 0) {
+        } else if (defenderHP <= 0 && userHP > 0) {
             $("#battle-log").html("<h3>You beat this defender!</h3><br>")
             // Removes defender from screen
-            $(".current-defender").empty();
+            $(".current-defender").remove();
             // Locks attack button until another defender is selected
             $(".attack-btn").attr("disabled", true);
             // Adds 1 to win counter - not visible, only for tracking
@@ -297,33 +282,26 @@ function attack() {
 
             // Check if defenders remain or the user beat them all
             if (wins === 3) {
-                $("#battle-log").html("<h3>You defeated all your enemies!.</h3><p>Hit the reset button to play again.");
+                $("#battle-log").html("<h3>You defeated all your enemies!</h3><p>Hit the reset button to play again.");
                 $(".reset-btn").attr("disabled", false);                     
 
             } else {
                 $("#battle-log").append("Choose another enemy.");
-                $(".reset-btn").attr("disabled", true);                     
-
+                $(".reset-btn").attr("disabled", true);         
             }
 
+            // Checks to see if both user and defender lose on the same turn 
+        } else if (defenderHP <= 0 && userHP <= 0) {
+            $("#battle-log").html("<h3>You both ran out of hit points.</h3><p>Hit the reset button to try again and defeat your enemies while surviving.<br>");
+            // Disable attack button - game is over;
+            $(".attack-btn").attr("disabled", true);
+            // Enable reset button to restart;
+            $(".reset-btn").attr("disabled", false);
         }
-
     })
 }
 
-// Defender HP reduced by user HP, display on screen
-// User HP reduced by defender HP, display on screen
-// User HP attack value increases by base amount
-// Check to see if user or defender has 0 HP
-// If so, move to second battle
-// If not, show lose message and instruct to reset to try again
-// Second battle
-// User selects second defender
-// Call battle function
-// Third battle
-// If won, show win message and instruct to reset to try again
-// If not, show lose message and instruct to reset to try again
-
+// Overall game play function
 function startGame() {
     resetGame();
     createGameValues();
