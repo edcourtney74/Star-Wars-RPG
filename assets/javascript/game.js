@@ -167,13 +167,11 @@ function selectCharacters() {
                 baseUserAP = mace.AP;
                 userAP = mace.AP;            
                 $(".assignedHP-mace").addClass("HP-counter");
-
-                // // TESTING THIS OUT
-                // enemies = $(".card-deck").html();
-                // console.log(`enemy 1 text: ${enemies}`);
-                // $("#enemies-left").append(enemies);
-                // $(".start-character-image").removeClass(".start-character-image");
                 
+                // Move everyone else to enemies list
+                $("#enemies-left").append( $("#dooku") );
+                $("#enemies-left").append( $("#yoda") );
+                $("#enemies-left").append( $("#maul") );                          
             } 
             
             else if ($(this).attr('value') === "dooku") {
@@ -181,29 +179,43 @@ function selectCharacters() {
                 baseUserAP = dooku.AP;
                 userAP = dooku.AP;
                 $(".assignedHP-dooku").addClass("HP-counter");
+
+                // Move everyone else to enemies list
+                $("#enemies-left").append( $("#mace") );
+                $("#enemies-left").append( $("#yoda") );
+                $("#enemies-left").append( $("#maul") );                          
             }
+            
 
             else if ($(this).attr('value') === "yoda") {
                 userHP = yoda.HP;
                 baseUserAP = yoda.AP;
                 userAP = yoda.AP;
-                $(".assignedHP-yoda").addClass("HP-counter");                
+                $(".assignedHP-yoda").addClass("HP-counter");
+                
+                // Move everyone else to enemies list
+                $("#enemies-left").append( $("#mace") );
+                $("#enemies-left").append( $("#dooku") );
+                $("#enemies-left").append( $("#maul") );
             }
 
             else if ($(this).attr('value') === "maul") {
                 userHP = maul.HP;
                 baseUserAP = maul.AP;
                 userAP = maul.AP;
-                $(".assignedHP-maul").addClass("HP-counter");             
+                $(".assignedHP-maul").addClass("HP-counter");
+                
+                // Move everyone else to enemies list
+                $("#enemies-left").append( $("#mace") );
+                $("#enemies-left").append( $("#dooku") );
+                $("#enemies-left").append( $("#yoda") );                          
             }
 
             // Enable reset button
             $(".reset-btn").attr("disabled", false);
 
-            // Need to move enemies elsewhere but can't figure it out
-
-            // Hide choose a character area - this works but I want to wait to activate it while I'm testing
-            // $(".character-choice").empty();
+            // Hide choose a character area
+            $(".character-choice").empty();
 
         } else {
             // Remove start-character-image class
