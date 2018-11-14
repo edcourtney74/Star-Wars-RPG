@@ -13,5 +13,6 @@ In this Star Wars role playing game, the user chooses from one of four character
   * A reset button lets the player start a new game at any time.
   * The attack button and reset buttons are hidden or disabled during appropriate parts of gameplay to lessen the likelihood of clicking the wrong button on accident.
   * Game alerts the user if he or she won the game, lost the game or if both ran out of hit points in the same round. 
+***
 ![Character choice photo](https://github.com/edcourtney74/Star-Wars-RPG/blob/master/assets/images/player-choice-screen.PNG "Game play")
 ![Game play photo](https://github.com/edcourtney74/Star-Wars-RPG/blob/master/assets/images/gameplay.PNG "Game play")
