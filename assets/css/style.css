@@ -5,16 +5,17 @@ body {
 
 .attack-btn {
     width: 100%;
-}
-
-.start-character-image {
-    max-width: 120px;
+    display: none;
 }
 
 .card-text {
     color: black;
     font-weight: thin;
     font-size: 13px;
+}
+
+.character-tray {
+    width: 600px;
 }
 
 .card-title {
@@ -24,12 +25,12 @@ body {
     border-bottom: gray thin solid;
 }
 
-#enemies-list {
-    border-right: thin white solid;
-}
-
 .reset-btn {
     width: 100%;
+    display: none;
+}
+.start-character-image {
+    max-width: 120px;
 }
 
 .title-bar {
@@ -42,6 +43,10 @@ body {
 
 #defender-character {
     max-width: 150px;
+}
+
+#enemies-left {
+    border-right: thin white solid;
 }
 
 #user-character {

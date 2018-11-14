@@ -74,9 +74,10 @@ function resetGame() {
     CPPossibles = [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
     isCharacterChosen = false;
     wins = 0;
-    // Disables attack button & reset button until characters are selected
-    $(".attack-btn").attr("disabled", true);
-    $(".reset-btn").attr("disabled", true);
+    
+    // Hides, disables attack button & reset buttons
+    $(".attack-btn").attr("disabled", true).css("display", "none");
+    $(".reset-btn").attr("disabled", true).css("display", "none");
 
     // Empty areas from previous games
     $("#character-list").empty();
@@ -166,8 +167,8 @@ function selectCharacters() {
                 userHP = mace.HP;
                 baseUserAP = mace.AP;
                 userAP = mace.AP;            
-                $(".assignedHP-mace").addClass("HP-counter");
-                
+                $(".assignedHP-mace").addClass("HP-counter");               
+             
                 // Move everyone else to enemies list
                 $("#enemies-left").append( $("#dooku") );
                 $("#enemies-left").append( $("#yoda") );
@@ -211,8 +212,14 @@ function selectCharacters() {
                 $("#enemies-left").append( $("#yoda") );                          
             }
 
-            // Enable reset button
-            $(".reset-btn").attr("disabled", false);
+            // Display header "Enemies Left"
+            $("#enemies-list").text("Choose your first opponent");
+
+            // Display "You" above character choice
+            $("#you").text("You");
+            
+            // Display, enable reset button
+            $(".reset-btn").attr("disabled", false).css("display", "block");
 
             // Hide choose a character area
             $(".character-choice").empty();
@@ -257,11 +264,17 @@ function selectCharacters() {
                 $(".assignedHP-maul").addClass("HP-counter-opponent");               
             }
             
-            // Enable attack button
-            $(".attack-btn").attr("disabled", false);
+            // Display Opponent header
+            $("#opponent").text("Opponent");
+
+            // Remove "Choose your opponent" text
+            $("#enemies-list").text("Enemies left");
+            
+            // Display, enable attack button
+            $(".attack-btn").attr("disabled", false).css("display", "block");
 
             // Add text to battle log
-            $("#battle-log").html("<p>Hit the attack button to begin the battle.</p><br><br>");
+            $("#battle-log").html("<p>Hit the attack button to begin the battle.</p><br><br><br><br><br>");
         }
     })
 

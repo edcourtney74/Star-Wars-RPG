@@ -19,9 +19,9 @@
     <div class="container">
         <!-- Character choice bar -->
         <div class="row character-choice character-erase">
-            <div class="col-md-7 offset-md-2">
-                <h2 id="intro-text" class="text-center">Choose a character</h2>
-                <div class="card-deck">
+            <div class="col-md-12">
+                <h2 class="text-center">Choose a character</h2>
+                <div class="card-deck character-tray mx-auto mt-3">
                     <div id="mace">
                         <div class="card start-character-image" value="mace">
                             <img class="card-img-top" src="assets/images/character1.jpg" alt="Mace Windu">
@@ -66,15 +66,15 @@
     <!-- Game play area -->
     <div class="row my-5">
         <!-- Enemies left -->
-        <div class="col-md-3 ml-4" id="enemies-list">
-            <h4>Enemies left</h4>
+        <div class="col-md-4 ml-4">
+            <h4 class= "mb-3" id="enemies-list"></h4>
             <div class="card-deck" id="enemies-left">
             </div>
         </div>
 
         <!-- Attack area - Your Character -->
         <div class="col-md-2 ml-5">
-            <h2>You</h2>
+            <h2 id="you"></h2>
             <div id="user-character">
             </div>           
         </div>
@@ -96,7 +96,7 @@
         </div>
         <!-- Attack area - Defender -->
         <div class="col-md-2">
-            <h2>Opponent</h2>
+            <h2 id="opponent"></h2>
             <div id="defender-character"></div>
         </div>
     </div>
