@@ -168,10 +168,10 @@ function selectCharacters() {
                 userAP = mace.AP;            
                 $(".assignedHP-mace").addClass("HP-counter");
 
-                // TESTING THIS OUT
-                enemies = $(".card-deck").html();
-                console.log(`enemy 1 text: ${enemies}`);
-                $("#enemies-left").append(enemies);
+                // // TESTING THIS OUT
+                // enemies = $(".card-deck").html();
+                // console.log(`enemy 1 text: ${enemies}`);
+                // $("#enemies-left").append(enemies);
                 // $(".start-character-image").removeClass(".start-character-image");
                 
             } 
