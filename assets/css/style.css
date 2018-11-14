@@ -1,16 +1,47 @@
+body {
+    background-image: url("../images/starfield-background.png");
+    color: white;
+}
+
 .attack-btn {
     width: 100%;
 }
 
-.start-character-image {
-    width: 10%;
-    padding: 0px 10px;
+.card {
+    max-width: 150px;
 }
 
-.enemies-left {
-    width:50%;
+.card-text {
+    color: black;
+    font-weight: thin;
+    font-size: 13px;
 }
 
-/* .#user-character {
-    
-} */
+.card-title {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    border-bottom: gray thin solid;
+}
+
+.enemies-list {
+    border-right: thin white solid;
+}
+
+.reset-btn {
+    width: 100%;
+}
+
+.title-bar {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #ffd700;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 55px;
+}
+
+#user-character {
+    width:100%;
+    /* border: gray thin solid; */
+    /* color: white */
+}
