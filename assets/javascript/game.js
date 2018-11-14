@@ -59,11 +59,8 @@ var defenderCP;
 // Variable for defender name
 var defenderName = "";
 // Variable for wins - this won't display, but will be used to determine when all defenders have been defeated
+// If wins = 3, the user won
 var wins;
-// TESTING THESE VARIABLES
-var enemies;
-var enemy2;
-var enemy3;
 
 // GLOBAL FUNCTIONS
 
@@ -91,6 +88,7 @@ function createGameValues() {
     // Character creation
     // Set random HP, attack and counterattack values for each character
     for (let i = 1; i < 5; i++) {
+        
         // HP calculation - using an array of possibles rather than random number
         // because we want different HP for each character
         //Calculate random index number for HPpossibles
@@ -140,7 +138,7 @@ function createGameValues() {
     maul.AP = APTotal[3];
     maul.CP = CPTotal[3];
 
-    // DIsplay HP on the screen
+    // Display HP on the screen
     $(".assignedHP-mace").text(`${mace.HP} hit points`);
     $(".assignedHP-dooku").text(`${dooku.HP} hit points`);
     $(".assignedHP-yoda").text(`${yoda.HP} hit points`);
@@ -228,10 +226,6 @@ function selectCharacters() {
             // Remove start-character-image class
             $(this).removeClass("start-character-image");
 
-            // Add name to variable for use in battle-log text - this isn't working.
-            // defenderName = $(this).attr("battlename");
-            // console.log(`defender name: ${defenderName}`);
-
             // Move the character to the Defender area
             $("#defender-character").append(this);
 
@@ -243,25 +237,37 @@ function selectCharacters() {
             if ($(this).attr('value') === "mace") {
                 defenderHP = mace.HP;
                 defenderCP = mace.CP;
-                $(".assignedHP-mace").addClass("HP-counter-opponent");       
+                $(".assignedHP-mace").addClass("HP-counter-opponent");
+                
+                // Add defender name for battle log
+                defenderName = "Mace Windu";       
             } 
             
             else if ($(this).attr('value') === "dooku") {
                 defenderHP = dooku.HP;
                 defenderCP = dooku.CP;
-                $(".assignedHP-dooku").addClass("HP-counter-opponent");                
+                $(".assignedHP-dooku").addClass("HP-counter-opponent"); 
+                
+                // Add defender name for battle log
+                defenderName = "Count Dooku";
             }
 
             else if ($(this).attr('value') === "yoda") {
                 defenderHP = yoda.HP;
                 defenderCP = yoda.CP;
-                $(".assignedHP-yoda").addClass("HP-counter-opponent");               
+                $(".assignedHP-yoda").addClass("HP-counter-opponent");
+                
+                // Add defender name for battle log
+                defenderName = "Master Yoda";
             }
 
             else if ($(this).attr('value') === "maul") {
                 defenderHP = maul.HP;
                 defenderCP = maul.CP;
-                $(".assignedHP-maul").addClass("HP-counter-opponent");               
+                $(".assignedHP-maul").addClass("HP-counter-opponent");
+                
+                // Add defender name for battle log
+                defenderName = "Darth Maul";
             }
             
             // Display Opponent header
@@ -275,6 +281,11 @@ function selectCharacters() {
 
             // Add text to battle log
             $("#battle-log").html("<p>Hit the attack button to begin the battle.</p><br><br><br><br><br>");
+
+            // Remove "Enemies left" text if final enemy is in the battle
+            if (wins === 2) {
+                $("#enemies-list").text("");
+            }
         }
     })
 
@@ -287,7 +298,7 @@ function selectCharacters() {
 function attack() {
     $(".attack-btn").on("click", function () {
         // Log attack power, counterattack power
-        $("#battle-log").html("<p> You attacked with " + userAP + " points of damage.</p><p>You received " + defenderCP + " points of damage.</p><p>Press the attack button to attack again.</p>");
+        $("#battle-log").html("<p> You attacked with " + userAP + " points of damage.</p><p>" + defenderName + " attacked you for " + defenderCP + " points of damage.</p><p>Press the attack button to attack again.</p>");
 
         // Calculate new HP left for both characters
         userHP -= defenderCP;
@@ -304,11 +315,11 @@ function attack() {
             // Disable attack button - game is over;
             $(".attack-btn").attr("disabled", true);
             // Enable reset button to restart;
-            $(".reset-btn").attr("disabled", false); 
+            $(".reset-btn").attr("disabled", false);             
         
             // Check to see if defender is out of HP
         } else if (defenderHP <= 0 && userHP > 0) {
-            $("#battle-log").html("<h3>You beat this defender!</h3><br>")
+            $("#battle-log").html("<h3>You beat " + defenderName + ".</h3><br>")
             // Removes defender from screen
             $(".current-defender").remove();
             // Locks attack button until another defender is selected
@@ -319,7 +330,14 @@ function attack() {
             // Check if defenders remain or the user beat them all
             if (wins === 3) {
                 $("#battle-log").html("<h3>You defeated all your enemies!</h3><p>Hit the reset button to play again.");
-                $(".reset-btn").attr("disabled", false);                     
+                $(".reset-btn").attr("disabled", false);
+                
+                // Hide "Opponent" and "Enemies left"
+                $("#enemies-list").text("");
+                $("#opponent").text("")
+
+                // Remove opponent card
+                $(".current-defender").remove();
 
             } else {
                 $("#battle-log").append("Choose another enemy.");
